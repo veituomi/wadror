@@ -1,3 +1,5 @@
 == README
 
-[https://pure-basin-7578.herokuapp.com/]
+[https://pure-basin-7578.herokuapp.com]
+
+[https://pure-basin-7578.herokuapp.com/breweries]
