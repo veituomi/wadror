@@ -3,23 +3,9 @@ class Beer < ActiveRecord::Base
 
 	belongs_to :brewery
 	has_many :ratings, dependent: :destroy
+	has_many :raters, -> { uniq }, through: :ratings, source: :user
 	
-	#def average_rating
-		#if ratings.count > 0
-			#sum = 0
-			
-			#return ratings.average(:score)
-			
-			#ratings.map { |s| sum += s.score }
-			
-			#ratings.each do |rating|
-			#	sum += rating.score
-			#end
-			
-			#return sum / ratings.count
-		#end
-		#return 0
-	#end
+	validates :name, length: { minimum: 1 }
 	
 	def to_s
 		return name + ' - ' + brewery.name
