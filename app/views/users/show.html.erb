@@ -30,7 +30,7 @@
 <% if @user.ratings.count > 0 %><p>
   favorite style: <%= @user.favorite_style %>
   <br/>
-  favorite brewery: <%= @user.favorite_brewery.name %>
+  favorite brewery: <%= @user.favorite_brewery %>
 </p><% end %>
 
 <% if @user == current_user %>

@@ -33,4 +33,22 @@ describe "User" do
       click_button('Create User')
     }.to change{User.count}.by(1)
   end
+  
+  describe "has favorite" do
+    let!(:user) { FactoryGirl.create :user2 }
+    let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
+    let!(:beer) { FactoryGirl.create :beer_ipa, name:"iso 3", brewery:brewery }
+    let!(:rating) { FactoryGirl.create :rating, score:15, beer:beer, user:user }
+    
+    before :each do
+      visit user_path(user.id)
+    end
+    
+    it "style shown" do
+      expect(page).to have_content("favorite style: IPA")
+    end
+    it "brewery shown" do
+      expect(page).to have_content("favorite brewery: Koff")
+    end
+  end
 end

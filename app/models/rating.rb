@@ -11,7 +11,7 @@ class Rating < ActiveRecord::Base
 	end
 	
 	def brewery
-		beer.brewery
+		beer.brewery.name
 	end
 	
 	def to_s
