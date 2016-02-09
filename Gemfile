@@ -38,6 +38,15 @@ group :development, :test do
   gem 'byebug'
   gem 'sqlite3'
   gem 'better_errors'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-its'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'simplecov', require: false
 end
 
 group :production do

@@ -5,7 +5,7 @@
 </h1>
 
 <p>
-  has made <%= @user.ratings.count %> ratings
+  has made <%= pluralize(@user.ratings.count, "rating") %>
   <br/>
   average: <%= @user.average_rating %>
 </p>
@@ -26,6 +26,12 @@
   <% end %>
 <% end %>
 </ul>
+
+<% if @user.ratings.count > 0 %><p>
+  favorite style: <%= @user.favorite_style %>
+  <br/>
+  favorite brewery: <%= @user.favorite_brewery.name %>
+</p><% end %>
 
 <% if @user == current_user %>
   <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>

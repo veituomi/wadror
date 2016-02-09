@@ -1,0 +1,2 @@
+[![Build Status](https://travis-ci.org/veituomi/wadror.png)](https://travis-ci.org/veituomi/wadror)
+[![Code Climate](https://codeclimate.com/github/veituomi/wadror.png)](https://codeclimate.com/github/veituomi/wadror)

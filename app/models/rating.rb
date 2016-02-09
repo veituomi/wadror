@@ -6,6 +6,14 @@ class Rating < ActiveRecord::Base
                                     less_than_or_equal_to: 50,
                                     only_integer: true }
 	
+	def style
+		beer.style
+	end
+	
+	def brewery
+		beer.brewery
+	end
+	
 	def to_s
 		"#{beer.name} #{score}"
 	end

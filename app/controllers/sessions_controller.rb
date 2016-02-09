@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       redirect_to user, notice: "Welcome back!"
       return
     end
-    redirect_to :back, notice: "Wrong username or password!"
+    redirect_to :back, notice: "Username and/or password mismatch"
   end
 
   def destroy
