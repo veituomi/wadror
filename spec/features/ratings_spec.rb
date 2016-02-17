@@ -42,7 +42,7 @@ describe "Rating" do
     it "is shown in user's own list of ratings" do
       visit user_path(user.id)
       
-      expect(page).to have_content "has made 1 rating"
+      expect(page).to have_content "Has made 1 rating"
       expect(page).to have_content rating1.to_s
       expect(page).to_not have_content rating2.to_s
     end

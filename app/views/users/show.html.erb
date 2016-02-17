@@ -5,10 +5,14 @@
 </h1>
 
 <p>
-  has made <%= pluralize(@user.ratings.count, "rating") %>
-  <br/>
-  average: <%= @user.average_rating %>
+  Has made <%= pluralize(@user.ratings.count, "rating") %>, average <%= @user.average_rating %>
 </p>
+
+<% if @user.ratings.count > 0 %><p>
+  favorite style: <%= @user.favorite_style %>
+  <br/>
+  favorite brewery: <%= @user.favorite_brewery %>
+</p><% end %>
 
 <h2>member of the following</h2>
 <p>
@@ -26,12 +30,6 @@
   <% end %>
 <% end %>
 </ul>
-
-<% if @user.ratings.count > 0 %><p>
-  favorite style: <%= @user.favorite_style %>
-  <br/>
-  favorite brewery: <%= @user.favorite_brewery %>
-</p><% end %>
 
 <% if @user == current_user %>
   <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>

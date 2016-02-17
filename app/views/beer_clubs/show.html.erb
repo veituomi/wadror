@@ -1,26 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @beer_club.name %>
-</p>
+<h1><%= @beer_club.name + " " + @beer_club.city %></h1>
 
 <p>
-  <strong>Founded:</strong>
-  <%= @beer_club.founded %>
+  Founded in <%= @beer_club.founded %>
 </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @beer_club.city %>
-</p>
-
-<h2>members</h2>
 <ul>
 <% @beer_club.memberships.each do |membership| %>
-  <li><%= link_to membership.user.username, user_path(membership.user) %> <%= link_to 'delete membership', membership_path(membership), method: :delete %></li>
+  <li><%= link_to membership.user.username, user_path(membership.user) %> <!--<%= link_to 'delete membership', membership_path(membership), method: :delete %>--></li>
 <% end %>
 </ul>
+
+ <% if current_user %>
+  <% @stored_membership = Membership.all.select{ |m| m.user_id == current_user.id and m.beer_club_id == @beer_club.id }.first %>
+  <% if @stored_membership.nil? %>
+    <%= form_for(@membership) do |f| %>
+        <%= f.hidden_field :beer_club_id %>
+        <%= f.submit value:"join the club" %>
+    <% end %>
+  <% else %>
+    <%= form_for(@stored_membership, method: "delete") do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit value: "end the membership" %>
+    <% end %>
+  <% end %>
+ <% end %>
 
 <%= link_to 'Edit', edit_beer_club_path(@beer_club) if current_user%>
 <br/>
