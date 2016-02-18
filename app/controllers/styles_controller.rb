@@ -9,7 +9,7 @@ class StylesController < ApplicationController
   end
   
   def new
-    @user = User.new
+    @style = Style.new
   end
 
   def edit
