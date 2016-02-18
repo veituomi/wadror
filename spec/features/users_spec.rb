@@ -37,7 +37,8 @@ describe "User" do
   describe "has favorite" do
     let!(:user) { FactoryGirl.create :user2 }
     let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
-    let!(:beer) { FactoryGirl.create :beer_ipa, name:"iso 3", brewery:brewery }
+    let!(:style) { FactoryGirl.create :style, name:"IPA" }
+    let!(:beer) { FactoryGirl.create :beer_ipa, name:"iso 3", brewery:brewery, style:style }
     let!(:rating) { FactoryGirl.create :rating, score:15, beer:beer, user:user }
     
     before :each do

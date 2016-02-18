@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe "Beer" do
+  let!(:style) { FactoryGirl.create :style, name:"Lager" }
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
   let!(:user) { FactoryGirl.create :user }
 
@@ -10,8 +11,8 @@ describe "Beer" do
 
   it "is added when a proper name is provided" do
     visit new_beer_path
-    select('IPA', from:'beer[style]')
     select('Koff', from:'beer[brewery_id]')
+    select('Lager', from:'beer[style_id]')
     fill_in('beer[name]', with:'New beer')
 
     expect{
@@ -21,7 +22,7 @@ describe "Beer" do
   
   it "is not added when no name is provided" do
     visit new_beer_path
-    select('IPA', from:'beer[style]')
+    select('Lager', from:'beer[style_id]')
     select('Koff', from:'beer[brewery_id]')
     fill_in('beer[name]', with:'')
 

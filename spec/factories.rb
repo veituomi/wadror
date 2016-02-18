@@ -32,12 +32,27 @@ FactoryGirl.define do
   factory :beer do
     name "Lager olut"
     brewery
-    style "Lager"
+    style
   end
   
   factory :beer_ipa, class: Beer do
     name "IPA olut"
     brewery
-    style "IPA"
+    style
+  end
+  
+  factory :style do
+    name "Lager"
+    description "olut"
+  end
+  
+  factory :style_lager, class: Style do
+    name "Lager"
+    description "Pohjahiivaolut"
+  end
+  
+  factory :style_ipa, class: Style do
+    name "IPA"
+    description "Indian pale ale"
   end
 end
