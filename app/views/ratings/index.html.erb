@@ -1,16 +1,32 @@
-<h2>List of ratings</h2>
+<h1>Rating statistics</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-xs-8 col-sm-4">
+        <h2>Best beers</h2>
+        <%= render 'list', best_items: @top_beers %>
+      </div>
+      <div class="col-xs-4 col-sm-4">
+        <h2>Best breweries</h2>
+        <%= render 'list', best_items: @top_breweries %>
+      </div>
+      <div class="col-xs-0 col-sm-4">
+        <h2>Best styles</h2>
+        <%= render 'list', best_items: @top_styles %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <h2>Most active users</h2>
+    <%= render 'user_list', users: @top_raters %>
+  </div>
+  <div class="col-sm-12">
+    <h2>Recent ratings</h2>
+    <%= render 'recent_list', recent_ratings: @recent_ratings %>
+  </div>
+</div>
 
 <p>
-Number of ratings <%= @ratings.count %>
+  <%= link_to 'Create new rating', new_rating_path, class:"btn btn-default" %>
 </p>
-
-<p>
-  <%= link_to 'Create new rating', new_rating_path %>
-</p>
-
-<ul>
- <% @ratings.each do |rating| %>
-   <li> <%= rating %>
-   <%= link_to rating.user.username, user_path(rating.user) %> </li>
- <% end %>
-</ul>

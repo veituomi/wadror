@@ -8,7 +8,13 @@ Rails.application.routes.draw do
   
   root 'breweries#index'
   
-  get 'kaikki_bisset', to: 'beers#index'
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+  
+  resources :users do
+    post 'toggle_banned', on: :member
+  end
   
   #get 'ratings', to: 'ratings#index'
   #get 'ratings/new', to:'ratings#new'

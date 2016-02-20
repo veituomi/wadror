@@ -1,0 +1,19 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>beer</th>
+    <th>score</th>
+    <th>rater</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% recent_ratings.each do |rating| %>
+      <tr>
+        <td><%= link_to rating.beer.name, rating.beer %></td>
+        <td><%= rating.score %></td>
+        <td><%= rating.user.username %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

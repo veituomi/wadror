@@ -1,9 +1,15 @@
 <h1>Styles</h1>
 
-<ul>
-  <% @styles.each do |style| %>
-    <li><%= link_to style.name, style %></li>
-  <% end %>
-</ul>
 
-<%= link_to('New Style', new_style_path) if current_user %>
+<div class="list-group">
+  <% @styles.each do |style| %>
+    <a href="<%= style_path(style.id) %>" class="list-group-item">
+      <h4 class="list-group-item-heading"><%= style.name %></h4>
+      <p>
+        <%= style.description %>
+      </p>
+    </a>
+  <% end %>
+</div>
+
+<%= link_to('New Style', new_style_path, class:"btn btn-default") if current_user %>

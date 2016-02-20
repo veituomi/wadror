@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Beer Clubs</h1>
+<h1>Beer clubs</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -25,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Beer club', new_beer_club_path if current_user %>
+<%= link_to 'Create a new club', new_beer_club_path, class:"btn btn-default" if current_user %>

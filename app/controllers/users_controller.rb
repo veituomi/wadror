@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :toggle_banned]
+  before_action :ensure_being_admin, only: [:toggle_banned]
 
   # GET /users
   # GET /users.json
@@ -61,6 +62,15 @@ class UsersController < ApplicationController
     else
       redirect_to breweries_path
     end
+  end
+  
+  def toggle_banned
+    if @user.banned
+      @user.update_attribute(:banned, false)
+    else
+      @user.update_attribute(:banned, true)
+    end
+    redirect_to :back, notice:"User status successfully changed"
   end
 
   private

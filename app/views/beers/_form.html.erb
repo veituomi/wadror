@@ -13,18 +13,18 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class:"form-control" %>
   </div>
   <div class="field">
     <%= f.label :style_id %><br>
-    <%= f.select :style_id, options_from_collection_for_select(@styles, :id, :name, selected: @beer.style_id) %>
+    <%= f.select :style_id, options_from_collection_for_select(@styles, :id, :name, selected: @beer.style_id), {}, {class:"form-control"} %>
   </div>
   <div class="field">
     <%= f.label :brewery_id %><br>
-    <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name, selected: @beer.brewery_id) %>
+    <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name, selected: @beer.brewery_id), {}, {class:"form-control"} %>
     <!--<%= f.number_field :brewery_id %>-->
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class:"btn btn-primary" %>
   </div>
 <% end %>

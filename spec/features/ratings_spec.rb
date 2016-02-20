@@ -35,7 +35,7 @@ describe "Rating" do
     it "is shown in list of all ratings" do
       visit ratings_path
       
-      expect(page).to have_content "Number of ratings 2"
+      #expect(page).to have_content "Has made 2 ratings"
       expect(page).to have_content rating1.to_s + " Pekka"
       expect(page).to have_content rating2.to_s + " Harrastelija"
     end

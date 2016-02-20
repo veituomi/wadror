@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
 	has_many :memberships, dependent: :destroy
 	has_many :beer_clubs, through: :memberships
 	
+	def self.top(n)
+		User.all.sort_by{ |u| -(u.ratings.count) }.take(n)
+	end
+	
 	def favorite_beer
 		return nil if ratings.empty?
 		ratings.order(score: :desc).limit(1).first.beer
@@ -32,7 +36,6 @@ class User < ActiveRecord::Base
 	end
 	
 	def styles_by_rating_average
-		#best_key_of_ratings ratings.group_by(&:style)
 		groups = rating_groups_by_average ratings.group_by(&:style)
 		groups.max_by{|k,v| v}[0]
 	end
@@ -40,20 +43,6 @@ class User < ActiveRecord::Base
 	def breweries_by_rating_average
 		groups = rating_groups_by_average ratings.group_by(&:brewery)
 		groups.max_by{|k,v| v}[0]
-	end
-	
-	# turha
-	def best_key_of_ratings(groups)
-		best_key = nil
-		best_average = 0
-		groups.each do |key, array|
-			average = calculate_average_score array
-			if best_average < average
-				best_average = average
-				best_key = key
-			end
-		end
-		best_key
 	end
 	
 	def rating_groups_by_average(groups)

@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
 
 <h1><%= @beer_club.name + " " + @beer_club.city %></h1>
 
@@ -17,16 +17,16 @@
   <% if @stored_membership.nil? %>
     <%= form_for(@membership) do |f| %>
         <%= f.hidden_field :beer_club_id %>
-        <%= f.submit value:"join the club" %>
+        <%= f.submit value:"join the club", class:"btn btn-primary" %>
     <% end %>
   <% else %>
     <%= form_for(@stored_membership, method: "delete") do |f| %>
       <%= f.hidden_field :beer_club_id %>
-      <%= f.submit value: "end the membership" %>
+      <%= f.submit value: "end the membership", class:"btn btn-primary" %>
     <% end %>
   <% end %>
  <% end %>
 
-<%= link_to 'Edit', edit_beer_club_path(@beer_club) if current_user%>
 <br/>
-<%= link_to 'Destroy the club', @beer_club, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Edit', edit_beer_club_path(@beer_club), class:"btn btn-primary" if current_user%>
+<%= link_to 'Destroy the club', @beer_club, class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>

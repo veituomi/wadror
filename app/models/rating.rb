@@ -1,4 +1,7 @@
 class Rating < ActiveRecord::Base
+	scope :recent, -> { order(id: :desc).limit(5) }
+	scope :best_styles, -> { order(id: :desc).limit(1) }
+	
 	belongs_to :beer
 	belongs_to :user
 	
