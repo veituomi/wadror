@@ -8,6 +8,11 @@ class PlacesController < ApplicationController
   end
   
   def search
+    if params[:city] == ""
+      redirect_to places_path, notice: "Please include at least one character in your query"
+      return
+    end
+    
     @places = BeermappingApi.places_in(params[:city])
     
     session[:searched_city] = params[:city]

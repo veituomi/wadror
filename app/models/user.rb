@@ -26,38 +26,22 @@ class User < ActiveRecord::Base
 	end
 	
 	def favorite_style
-		return nil if ratings.empty?
-		styles_by_rating_average
+		favorite :style
 	end
 	
 	def favorite_brewery
+		favorite :brewery
+	end
+	
+	def favorite(category)
 		return nil if ratings.empty?
-		breweries_by_rating_average
+	
+		rated = ratings.map{ |r| r.beer.send(category) }.uniq
+		rated.sort_by { |item| -rating_of(category, item) }.first
 	end
 	
-	def styles_by_rating_average
-		groups = rating_groups_by_average ratings.group_by(&:style)
-		groups.max_by{|k,v| v}[0]
-	end
-	
-	def breweries_by_rating_average
-		groups = rating_groups_by_average ratings.group_by(&:brewery)
-		groups.max_by{|k,v| v}[0]
-	end
-	
-	def rating_groups_by_average(groups)
-		averages = Hash.new
-		groups.each do |key, array|
-			averages[key] = calculate_average_score array
-		end
-		averages
-	end
-	
-	def calculate_average_score(array)
-		sum = 0
-		array.each { |rating|
-			sum += rating.score
-		}
-		sum.to_f / array.length
+	def rating_of(category, item)
+		ratings_of = ratings.select{ |r| r.beer.send(category)==item }
+		ratings_of.map(&:score).inject(&:+) / ratings_of.count.to_f
 	end
 end

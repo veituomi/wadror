@@ -16,7 +16,7 @@ FactoryGirl.define do
   end
 
   factory :rating2, class: Rating do
-    score 20
+    score 23
   end
   
   factory :brewery do

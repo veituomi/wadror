@@ -43,7 +43,7 @@ RSpec.describe User, type: :model do
       user.ratings << FactoryGirl.create(:rating2)
 
       expect(user.ratings.count).to eq(2)
-      expect(user.average_rating).to eq(15.0)
+      expect(user.average_rating).to eq(16.5)
     end
   end
   
@@ -114,14 +114,16 @@ RSpec.describe User, type: :model do
       it "is the one with highest average rating if several rated" do
         best = create_beers_for_favorite_style_and_brewery
         
-        expect(user.favorite_brewery).to eq(best.brewery.name)
+        expect(user.favorite_brewery.name).to eq(best.brewery.name)
       end
     end
   end
 end
 
 def create_beers_for_favorite_style_and_brewery
+  brewery = FactoryGirl.create(:brewery)
   create_beers_with_ratings(user, FactoryGirl.create(:style, name:"Lager"), 10, 15, 25, 11, 15)
+  Beer.all.each { |b| b.update_attribute(:brewery, brewery) }
   best_ranked = FactoryGirl.create(:beer_ipa, style:FactoryGirl.create(:style_ipa))
   best_rating = FactoryGirl.create(:rating2)
   best_ranked.brewery = FactoryGirl.create(:brewery2)

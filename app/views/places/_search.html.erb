@@ -1,0 +1,7 @@
+<%= form_tag places_path do %>
+  <div class="field">
+    <%= label_tag :city, "city" %>
+    <%= text_field_tag :city, params[:city], class:"form-control" %>
+  </div>
+  <%= submit_tag "Search", class:"btn btn-default" %>
+<% end %>
