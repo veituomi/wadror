@@ -10,6 +10,22 @@ class BreweriesController < ApplicationController
     @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+    
+    @order = params[:order] || 'name'
+    
+    if params[:order]
+      if session[:breweries_direction]
+        session[:breweries_direction] = false
+      else
+        session[:breweries_direction] = true
+      end
+    end
+    
+    @cachedata = 'brewerylist-' + @order + '-' + (session[:breweries_direction]? 'true' : 'false')
+    
+    @active_breweries = sort_breweries @active_breweries, @order, session[:breweries_direction]
+    
+    @retired_breweries = sort_breweries @retired_breweries, @order, session[:breweries_direction]
   end
 
   # GET /breweries/1
@@ -73,6 +89,17 @@ class BreweriesController < ApplicationController
     new_status = brewery.active? ? "active" : "retired"
 
     redirect_to :back, notice:"brewery activity status changed to #{new_status}"
+  end
+  
+  def sort_breweries(breweries, order, desc)
+    breweries = case order
+      when 'name' then breweries.sort_by{ |b| b.name }
+      when 'year' then breweries.sort_by{ |b| b.year }
+    end
+    if desc
+      return breweries.reverse
+    end
+    breweries
   end
 
   private

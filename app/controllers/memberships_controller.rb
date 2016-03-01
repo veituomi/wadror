@@ -14,6 +14,14 @@ class MembershipsController < ApplicationController
     @beer_clubs = BeerClub.all
     @user = current_user
   end
+  
+  def confirm
+    set_membership
+    if current_user and current_user.memberships.confirmed.find_by beer_club: @membership.beer_club.id
+      @membership.update_attribute :confirmed, true
+    end
+    redirect_to @membership.beer_club
+  end
 
   def edit
   end
@@ -23,6 +31,7 @@ class MembershipsController < ApplicationController
     @user = current_user
     
     @membership.user_id = @user.id
+    @membership.confirmed = false
 
     respond_to do |format|
       if @membership.save

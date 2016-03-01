@@ -16,11 +16,17 @@
 </p><% end %>
 
 <% if @user.memberships.count > 0 %>
-<h2>member of the following</h2>
+<h2>beer clubs</h2>
+<h3>member of</h3>
 <p>
-<% @user.memberships.each do |membership| %>
+<% @confirmed_memberships.each do |membership| %>
   <%= link_to membership.beer_club.name, beer_club_path(membership.beer_club) %>
-  <!--<%= link_to 'delete membership', membership_path(membership), method: :delete %>--><br/>
+<% end %>
+</p>
+<h3>applied membership of</h3>
+<p>
+<% @pending_memberships.each do |membership| %>
+  <%= link_to membership.beer_club.name, beer_club_path(membership.beer_club) %>
 <% end %>
 </p>
 <% end %>

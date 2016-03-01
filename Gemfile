@@ -37,6 +37,8 @@ gem 'httparty'
 
 gem 'bootstrap-sass'
 
+gem 'jquery-turbolinks'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -44,6 +46,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-its'
+  gem 'rack-mini-profiler'
 end
 
 group :test do
@@ -52,6 +55,8 @@ group :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :production do

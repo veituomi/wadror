@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     post 'toggle_banned', on: :member
   end
   
+  resources :memberships do
+    post 'confirm', on: :member
+  end
+  
   #get 'ratings', to: 'ratings#index'
   #get 'ratings/new', to:'ratings#new'
   #post 'ratings', to: 'ratings#create'
@@ -32,6 +36,10 @@ Rails.application.routes.draw do
   resources :places, only: [:index, :show]
   
   post 'places', to:'places#search'
+  
+  get 'beerlist', to:'beers#list'
+  get 'ngbeerlist', to:'beers#nglist'
+  get 'brewerylist', to:'breweries#nglist'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
